@@ -1,0 +1,60 @@
+<div id="btnGroup">
+    <!-- <addUser (user)="addUser($event)" [arUsers]="arUsers"></addUser> -->
+    <button class="btn btn-secondary" *ngIf="!addFormS" (click)="sortByAge()">Sort by Age</button>
+    <button class="btn btn-secondary" *ngIf="!addFormS" (click)="sortByName()">Sort by Name</button>
+  </div>
+  <input #txtFname placeholder="first name" />
+  <tr *ngFor="let item of arUsers | searchfilter: 'fname' : txtFname.value">
+    <td>
+        {{item.fname}}
+    </td>
+    <td>
+        {{item.lname}}
+    </td>
+  </tr>
+<div style="margin:1%" class="card" *ngFor="let user of arUsers ;let i =index ">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="detail">
+        <div class="detail-images">
+          <img src={{user.picture}} alt="Picture">
+        </div>
+        <h3> {{user.name}}</h3>
+        <h4>{{user.age}}</h4>
+        <p>{{user.phone}}</p>
+        <p>{{user.address}}</p>
+
+        <div class="content-shield"></div>
+        <ul>
+          <li>
+            <!-- <editUser [user]="user"></editUser> -->
+          </li>
+          <li>
+            <button style="color:red" title="Delete" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal" (click)="deleteUserModal(i)">
+              <i class="fa fa-remove"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="deleteModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>You wish to        
+          <b style="color:red">Delete</b> this user : <b>{{userToDelete}}</b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+        <button (click)="deleteUser()" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">YES</button>
+      </div>
+    </div>
+
+  </div>
+</div>
